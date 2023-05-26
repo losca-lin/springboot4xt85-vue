@@ -34,109 +34,109 @@
 
 				</el-row>
 			</el-form>
-			
+
 			<!-- <div> -->
 				<el-table class="tables"
 					:stripe='true'
-					:style='{"padding":"0","borderColor":"#e2f0e2","margin":"0 0 20px","borderRadius":"5px","borderWidth":"1px 0 0 1px","background":"#fff","width":"calc(100% - 0px)","borderStyle":"solid"}' 
+					:style='{"padding":"0","borderColor":"#e2f0e2","margin":"0 0 20px","borderRadius":"5px","borderWidth":"1px 0 0 1px","background":"#fff","width":"calc(100% - 0px)","borderStyle":"solid"}'
 					v-if="isAuth('yuangonggongzi','查看')"
 					:data="dataList"
 					v-loading="dataListLoading"
 				@selection-change="selectionChangeHandler">
 					<el-table-column :resizable='true' type="selection" align="center" width="50"></el-table-column>
 					<el-table-column :resizable='true' :sortable='true' label="序号" type="index" width="50" />
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="nianyuefen"
 					label="年月份">
 						<template slot-scope="scope">
 							{{scope.row.nianyuefen}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="yuangonggonghao"
 					label="员工工号">
 						<template slot-scope="scope">
 							{{scope.row.yuangonggonghao}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="yuangongxingming"
 					label="员工姓名">
 						<template slot-scope="scope">
 							{{scope.row.yuangongxingming}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="zhiwei"
 					label="职位">
 						<template slot-scope="scope">
 							{{scope.row.zhiwei}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="bumen"
 					label="部门">
 						<template slot-scope="scope">
 							{{scope.row.bumen}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="gongzikahao"
 					label="工资卡号">
 						<template slot-scope="scope">
 							{{scope.row.gongzikahao}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="dixin"
 					label="底薪">
 						<template slot-scope="scope">
 							{{scope.row.dixin}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
-						prop="quanqinjiang"
-					label="全勤奖">
-						<template slot-scope="scope">
-							{{scope.row.quanqinjiang}}
-						</template>
-					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+<!--					<el-table-column :resizable='true' :sortable='true'  -->
+<!--						prop="quanqinjiang"-->
+<!--					label="全勤奖">-->
+<!--						<template slot-scope="scope">-->
+<!--							{{scope.row.quanqinjiang}}-->
+<!--						</template>-->
+<!--					</el-table-column>-->
+					<el-table-column :resizable='true' :sortable='true'
 						prop="jiabanfei"
-					label="加班费">
+					label="考勤费">
 						<template slot-scope="scope">
 							{{scope.row.jiabanfei}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="jixiaojiangjin"
 					label="绩效奖金">
 						<template slot-scope="scope">
 							{{scope.row.jixiaojiangjin}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="qitakoukuan"
 					label="其它扣款">
 						<template slot-scope="scope">
 							{{scope.row.qitakoukuan}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="jine"
 					label="金额">
 						<template slot-scope="scope">
 							{{scope.row.jine}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="gongzibeizhu"
 					label="工资备注">
 						<template slot-scope="scope">
 							{{scope.row.gongzibeizhu}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="dengjishijian"
 					label="登记时间">
 						<template slot-scope="scope">
@@ -172,7 +172,7 @@
 				></el-pagination>
 			<!-- </div> -->
 		</template>
-		
+
 		<!-- 添加/修改页面  将父组件的search方法传递给子组件-->
 		<add-or-update v-if="addOrUpdateFlag" :parent="this" ref="addOrUpdate"></add-or-update>
 
@@ -383,17 +383,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-	
+
 	.center-form-pv {
 	  .el-date-editor.el-input {
 	    width: auto;
 	  }
 	}
-	
+
 	.el-input {
 	  width: auto;
 	}
-	
+
 	// form
 	.center-form-pv .el-input /deep/ .el-input__inner {
 				border: 1px solid #eee;
@@ -406,7 +406,7 @@ export default {
 				font-size: 16px;
 				height: 50px;
 			}
-	
+
 	.center-form-pv .el-select /deep/ .el-input__inner {
 				border: 1px solid #eee;
 				border-radius: 0px;
@@ -419,7 +419,7 @@ export default {
 				line-height: 30px;
 				height: 50px;
 			}
-	
+
 	.center-form-pv .el-date-editor /deep/ .el-input__inner {
 				border: 1px solid #eee;
 				border-radius: 0px;
@@ -431,18 +431,18 @@ export default {
 				font-size: 16px;
 				height: 50px;
 			}
-	
+
 	// table
 	.el-table /deep/ .el-table__header-wrapper thead {
 				color: #999;
 				font-weight: 500;
 				width: 100%;
 			}
-	
+
 	.el-table /deep/ .el-table__header-wrapper thead tr {
 				background: #fff;
 			}
-	
+
 	.el-table /deep/ .el-table__header-wrapper thead tr th {
 				padding: 10px;
 				color: #000;
@@ -467,7 +467,7 @@ export default {
 				text-overflow: ellipsis;
 			}
 
-	
+
 	.el-table /deep/ .el-table__body-wrapper tbody {
 				width: 100%;
 			}
@@ -475,7 +475,7 @@ export default {
 	.el-table /deep/ .el-table__body-wrapper tbody tr {
 				background: none;
 			}
-	
+
 	.el-table /deep/ .el-table__body-wrapper tbody tr td {
 				padding: 2px 10px;
 				color: #666;
@@ -485,11 +485,11 @@ export default {
 				border-style: solid;
 				text-align: left;
 			}
-	
+
 		.el-table /deep/ .el-table__body-wrapper tbody tr.el-table__row--striped td {
 		background: rgba(246,254,246,.5);
 	}
-		
+
 	.el-table /deep/ .el-table__body-wrapper tbody tr:hover td {
 				padding: 2px 10px;
 				color: #999;
@@ -499,7 +499,7 @@ export default {
 				border-style: solid;
 				text-align: left;
 			}
-	
+
 	.el-table /deep/ .el-table__body-wrapper tbody tr td {
 				padding: 2px 10px;
 				color: #666;
@@ -518,7 +518,7 @@ export default {
 				line-height: 24px;
 				text-overflow: ellipsis;
 			}
-	
+
 	// pagination
 	.main-content .el-pagination /deep/ .el-pagination__total {
 				margin: 0 10px 0 0;
@@ -530,7 +530,7 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-prev {
 				border: none;
 				border-radius: 30px;
@@ -545,7 +545,7 @@ export default {
 				min-width: 35px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-next {
 				border: none;
 				border-radius: 30px;
@@ -560,7 +560,7 @@ export default {
 				min-width: 35px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-prev:disabled {
 				border: none;
 				cursor: not-allowed;
@@ -575,7 +575,7 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-next:disabled {
 				border: none;
 				cursor: not-allowed;
@@ -613,7 +613,7 @@ export default {
 				min-width: 30px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pager .number:hover {
 				cursor: pointer;
 				padding: 0 4px;
@@ -629,7 +629,7 @@ export default {
 				min-width: 30px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pager .number.active {
 				cursor: default;
 				padding: 0 4px;
@@ -645,7 +645,7 @@ export default {
 				min-width: 30px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes {
 				display: inline-block;
 				vertical-align: top;
@@ -653,13 +653,13 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input {
 				margin: 0 5px;
 				width: 100px;
 				position: relative;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input .el-input__inner {
 				border: 1px solid #DCDFE6;
 				cursor: pointer;
@@ -675,14 +675,14 @@ export default {
 				text-align: center;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input span.el-input__suffix {
 				top: 0;
 				position: absolute;
 				right: 0;
 				height: 100%;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input .el-input__suffix .el-select__caret {
 				cursor: pointer;
 				color: #C0C4CC;
@@ -691,7 +691,7 @@ export default {
 				line-height: 28px;
 				text-align: center;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__jump {
 				margin: 0 0 0 24px;
 				color: #606266;
@@ -701,7 +701,7 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__jump .el-input {
 				border-radius: 3px;
 				padding: 0 2px;
@@ -714,7 +714,7 @@ export default {
 				text-align: center;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__jump .el-input .el-input__inner {
 				border: 1px solid #DCDFE6;
 				cursor: pointer;

@@ -62,7 +62,15 @@
                     placeholder="部门" readonly></el-input>
         </el-form-item>
         <el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'" label="职位" prop="zhiwei">
-          <el-input v-model="ruleForm.zhiwei" placeholder="职位" clearable :readonly="ro.zhiwei"></el-input>
+          <el-select :disabled="ro.zhiwei" v-model="ruleForm.zhiwei" placeholder="请选择职位">
+            <el-option
+                v-for="(item,index) in bumenOptions2"
+                v-bind:key="index"
+                :label="item"
+                :value="item">
+            </el-option>
+          </el-select>
+<!--          <el-input v-model="ruleForm.zhiwei" placeholder="职位" clearable :readonly="ro.zhiwei"></el-input>-->
         </el-form-item>
         <el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="职位" prop="zhiwei">
           <el-input v-model="ruleForm.zhiwei" placeholder="职位" readonly></el-input>
@@ -230,6 +238,12 @@ export default {
 
       xingbieOptions: [],
       bumenOptions: [],
+      bumenOptions2: [
+        "部长",
+        "副部长",
+        "组长",
+        "员工",
+      ],
 
 
       rules: {

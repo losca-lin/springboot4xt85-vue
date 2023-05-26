@@ -16,7 +16,7 @@
 					<el-input v-model="ruleForm.yejibianhao" placeholder="业绩编号" readonly></el-input>
 				</el-form-item>
 				<el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'"  label="销售额" prop="xiaoshoue">
-					<el-input v-model="ruleForm.xiaoshoue" placeholder="销售额" clearable  :readonly="ro.xiaoshoue"></el-input>
+					<el-input v-model="ruleForm.xiaoshoue" placeholder="销售额" clearable  readonly></el-input>
 				</el-form-item>
 				<el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="销售额" prop="xiaoshoue">
 					<el-input v-model="ruleForm.xiaoshoue" placeholder="销售额" readonly></el-input>
@@ -25,11 +25,11 @@
 					<el-date-picker
 						format="yyyy 年 MM 月 dd 日"
 						value-format="yyyy-MM-dd"
-						v-model="ruleForm.riqi" 
+						v-model="ruleForm.riqi"
 						type="date"
 						:readonly="ro.riqi"
 						placeholder="日期"
-					></el-date-picker> 
+					></el-date-picker>
 				</el-form-item>
 				<el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-else-if="ruleForm.riqi" label="日期" prop="riqi">
 					<el-input v-model="ruleForm.riqi" placeholder="日期" readonly></el-input>
@@ -41,17 +41,55 @@
 					<el-input v-model="ruleForm.beizhu" placeholder="备注" readonly></el-input>
 				</el-form-item>
 				<el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'"  label="员工工号" prop="yuangonggonghao">
-					<el-input v-model="ruleForm.yuangonggonghao" placeholder="员工工号" clearable  :readonly="ro.yuangonggonghao"></el-input>
+<!--					<el-input v-model="ruleForm.yuangonggonghao" placeholder="员工工号" clearable  :readonly="ro.yuangonggonghao"></el-input>-->
+          <el-select v-model="ruleForm.yuangonggonghao" placeholder="请选择员工">
+            <el-option
+                v-for="(item,index) in yuangongOptions"
+                v-bind:key="index"
+                :label="item.yuangonggonghao"
+                :value="item.yuangonggonghao">
+            </el-option>
+          </el-select>
 				</el-form-item>
 				<el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="员工工号" prop="yuangonggonghao">
 					<el-input v-model="ruleForm.yuangonggonghao" placeholder="员工工号" readonly></el-input>
 				</el-form-item>
 				<el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'"  label="员工姓名" prop="yuangongxingming">
-					<el-input v-model="ruleForm.yuangongxingming" placeholder="员工姓名" clearable  :readonly="ro.yuangongxingming"></el-input>
+					<el-input v-model="ruleForm.yuangongxingming" placeholder="员工姓名" clearable  readonly></el-input>
 				</el-form-item>
 				<el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="员工姓名" prop="yuangongxingming">
 					<el-input v-model="ruleForm.yuangongxingming" placeholder="员工姓名" readonly></el-input>
 				</el-form-item>
+
+        <el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'"  label="产品名称" prop="chanpinmingcheng">
+<!--          <el-input v-model="ruleForm.chanpinmingcheng" placeholder="产品名称" clearable  :readonly="ro.chanpinmingcheng"></el-input>-->
+          <el-select v-model="ruleForm.chanpinmingcheng" placeholder="请选择产品">
+            <el-option
+                v-for="(item,index) in chanpinOptions"
+                v-bind:key="index"
+                :label="item.chanpinmingcheng"
+                :value="item.chanpinmingcheng">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="产品名称" prop="chanpinmingcheng">
+          <el-input v-model="ruleForm.chanpinmingcheng" placeholder="产品名称" readonly></el-input>
+        </el-form-item>
+
+        <el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'"  label="产品单价" prop="jiage">
+          <el-input v-model="ruleForm.jiage" placeholder="产品单价" clearable  readonly></el-input>
+        </el-form-item>
+        <el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="产品单价" prop="jiage">
+          <el-input v-model="ruleForm.jiage" placeholder="产品单价" readonly></el-input>
+        </el-form-item>
+
+        <el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'"  label="销售数量" prop="count">
+          <el-input v-model="ruleForm.count" placeholder="销售数量" clearable ></el-input>
+        </el-form-item>
+        <el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="销售数量" prop="count">
+          <el-input v-model="ruleForm.count" placeholder="销售数量" readonly></el-input>
+        </el-form-item>
+
 			</template>
 			<el-form-item :style='{"padding":"0","margin":"0"}' class="btn">
 				<el-button :style='{"border":"0","cursor":"pointer","padding":"0","margin":"0 20px 0 0","outline":"none","color":"#fff","borderRadius":"0px","background":"#339933","width":"128px","lineHeight":"40px","fontSize":"16px","height":"40px"}'  v-if="type!='info'" type="primary" class="btn-success" @click="onSubmit">提交</el-button>
@@ -59,7 +97,7 @@
 				<el-button :style='{"border":"0px solid #1b5a90","cursor":"pointer","padding":"0","margin":"0","outline":"none","color":"#333","borderRadius":"0px","background":"#FFCC33","width":"128px","lineHeight":"40px","fontSize":"16px","height":"40px"}' v-if="type=='info'" class="btn-close" @click="back()">返回</el-button>
 			</el-form-item>
 		</el-form>
-    
+
 
   </div>
 </template>
@@ -135,8 +173,8 @@ export default {
 		return {
 			id: '',
 			type: '',
-			
-			
+
+
 			ro:{
 				yejibianhao : false,
 				xiaoshoue : false,
@@ -145,8 +183,8 @@ export default {
 				yuangonggonghao : false,
 				yuangongxingming : false,
 			},
-			
-			
+
+
 			ruleForm: {
 				yejibianhao: this.getUUID(),
 				xiaoshoue: '',
@@ -155,9 +193,9 @@ export default {
 				yuangonggonghao: '',
 				yuangongxingming: '',
 			},
-		
 
-			
+
+
 			rules: {
 				yejibianhao: [
 				],
@@ -172,7 +210,9 @@ export default {
 				],
 				yuangongxingming: [
 				],
-			}
+			},
+      yuangongOptions:[],
+      chanpinOptions:[]
 		};
 	},
 	props: ["parent"],
@@ -186,14 +226,82 @@ export default {
 	created() {
 		this.ruleForm.riqi = this.getCurDate()
 	},
-	methods: {
-		
-		// 下载
+  watch: {
+    'ruleForm.yuangonggonghao': {
+      handler(newValue, oldValue) {
+        this.yuangongOptions.forEach(item=>{
+          if (item.yuangonggonghao == newValue){
+            this.ruleForm.yuangongxingming =item.yuangongxingming;
+            return;
+          }
+        })
+
+      },
+
+    },
+    'ruleForm.chanpinmingcheng':{
+      handler(newValue, oldValue) {
+        this.chanpinOptions.forEach(item=>{
+          if (item.chanpinmingcheng == newValue){
+            this.ruleForm.jiage =item.jiage;
+            return;
+          }
+        })
+        if (this.ruleForm.xiaoshoue != ''){
+          this.ruleForm.xiaoshoue = this.ruleForm.jiage * this.ruleForm.count;
+        }
+      }
+    },
+    'ruleForm.count':{
+      handler(newValue, oldValue) {
+        console.log("======")
+        console.log(newValue,oldValue)
+        // this.$message("hello")
+        if (this.ruleForm.jiage == '') {
+          this.$message("请先选择产品")
+        }else {
+          this.ruleForm.xiaoshoue = this.ruleForm.jiage * this.ruleForm.count;
+        }
+      }
+    }
+  },
+
+  methods: {
+    getChanpinOptions(){
+      this.$http({
+        url: `chanpinxinxi/list`,
+        method: "get",
+      }).then(({data}) => {
+        if (data && data.code === 0) {
+          this.chanpinOptions = data.data.list;
+        } else {
+          this.$message.error(data.msg);
+        }
+      })
+    },
+    getYuangongOptions() {
+      this.$http({
+        url: `yuangong/list`,
+        method: "get",
+      }).then(({data}) => {
+        if (data && data.code === 0) {
+          this.yuangongOptions = data.data.list;
+        } else {
+          this.$message.error(data.msg);
+        }
+      })
+
+    },
+
+
+    // 下载
 		download(file){
 			window.open(`${file}`)
 		},
 		// 初始化
 		init(id,type) {
+      this.getYuangongOptions();
+      this.getChanpinOptions();
 			if (id) {
 				this.id = id;
 				this.type = type;
@@ -237,7 +345,7 @@ export default {
 							continue;
 						}
 				}
-				
+
 
 
 
@@ -245,15 +353,15 @@ export default {
 
 
 			}
-			
-			
+
+
 			// 获取用户信息
 			this.$http({
 				url: `${this.$storage.get('sessionTable')}/session`,
 				method: "get"
 			}).then(({ data }) => {
 				if (data && data.code === 0) {
-					
+
 					var json = data.data;
 					if(((json.yuangonggonghao!=''&&json.yuangonggonghao) || json.yuangonggonghao==0) && this.$storage.get("role")!="管理员"){
 						this.ruleForm.yuangonggonghao = json.yuangonggonghao
@@ -267,8 +375,8 @@ export default {
 					this.$message.error(data.msg);
 				}
 			});
-			
-			
+
+
 		},
     // 多级联动参数
 
@@ -339,20 +447,20 @@ var objcross = this.$storage.getObj('crossObj');
 		 if(crossrefid && crossuserid) {
 			 this.ruleForm.crossuserid = crossuserid;
 			 this.ruleForm.crossrefid = crossrefid;
-			let params = { 
-				page: 1, 
-				limit: 10, 
+			let params = {
+				page: 1,
+				limit: 10,
 				crossuserid:this.ruleForm.crossuserid,
 				crossrefid:this.ruleForm.crossrefid,
-			} 
-			this.$http({ 
-				url: "chanpinxiaoshouzhangmu/page", 
-				method: "get", 
-				params: params 
-			}).then(({ 
-				data 
-			}) => { 
-				if (data && data.code === 0) { 
+			}
+			this.$http({
+				url: "chanpinxiaoshouzhangmu/page",
+				method: "get",
+				params: params
+			}).then(({
+				data
+			}) => {
+				if (data && data.code === 0) {
 				       if(data.data.total>=crossoptnum) {
 					     this.$message.error(this.$storage.get('tips'));
 					       return false;
@@ -381,8 +489,8 @@ var objcross = this.$storage.getObj('crossObj');
 					 });
 
 				       }
-				} else { 
-				} 
+				} else {
+				}
 			});
 		 } else {
 			 this.$http({
@@ -430,15 +538,15 @@ var objcross = this.$storage.getObj('crossObj');
 		width: 100%;
 		height: 500px;
 	}
-	
+
 	.search-box {
 		position: absolute;
 	}
-	
+
 	.el-date-editor.el-input {
 		width: auto;
 	}
-	
+
 	.add-update-preview .el-form-item /deep/ .el-form-item__label {
 	  	  padding: 0 10px 0 0;
 	  	  color: #666;
@@ -448,11 +556,11 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  line-height: 40px;
 	  	  text-align: right;
 	  	}
-	
+
 	.add-update-preview .el-form-item /deep/ .el-form-item__content {
 	  margin-left: 180px;
 	}
-	
+
 	.add-update-preview .el-input /deep/ .el-input__inner {
 	  	  border: 1px solid #ddd;
 	  	  border-radius: 0px;
@@ -464,7 +572,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  font-size: 16px;
 	  	  height: 40px;
 	  	}
-	
+
 	.add-update-preview .el-select /deep/ .el-input__inner {
 	  	  border: 1px solid #ddd;
 	  	  border-radius: 0px;
@@ -476,7 +584,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  font-size: 16px;
 	  	  height: 40px;
 	  	}
-	
+
 	.add-update-preview .el-date-editor /deep/ .el-input__inner {
 	  	  border: 1px solid #ddd;
 	  	  border-radius: 0px;
@@ -488,7 +596,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  font-size: 16px;
 	  	  height: 40px;
 	  	}
-	
+
 	.add-update-preview /deep/ .el-upload--picture-card {
 		background: transparent;
 		border: 0;
@@ -498,7 +606,7 @@ var objcross = this.$storage.getObj('crossObj');
 		line-height: initial;
 		vertical-align: middle;
 	}
-	
+
 	.add-update-preview /deep/ .upload .upload-img {
 	  	  border: 1px solid #ddd;
 	  	  cursor: pointer;
@@ -511,7 +619,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  text-align: center;
 	  	  height: 100px;
 	  	}
-	
+
 	.add-update-preview /deep/ .el-upload-list .el-upload-list__item {
 	  	  border: 1px solid #ddd;
 	  	  cursor: pointer;
@@ -524,7 +632,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  text-align: center;
 	  	  height: 100px;
 	  	}
-	
+
 	.add-update-preview /deep/ .el-upload .el-icon-plus {
 	  	  border: 1px solid #ddd;
 	  	  cursor: pointer;
@@ -537,7 +645,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  text-align: center;
 	  	  height: 100px;
 	  	}
-	
+
 	.add-update-preview .el-textarea /deep/ .el-textarea__inner {
 	  	  border: 1px solid #ddd;
 	  	  border-radius: 0px;

@@ -26,86 +26,100 @@
 
 				</el-row>
 			</el-form>
-			
+
 			<!-- <div> -->
 				<el-table class="tables"
 					:stripe='true'
-					:style='{"padding":"0","borderColor":"#e2f0e2","margin":"0 0 20px","borderRadius":"5px","borderWidth":"1px 0 0 1px","background":"#fff","width":"calc(100% - 0px)","borderStyle":"solid"}' 
+					:style='{"padding":"0","borderColor":"#e2f0e2","margin":"0 0 20px","borderRadius":"5px","borderWidth":"1px 0 0 1px","background":"#fff","width":"calc(100% - 0px)","borderStyle":"solid"}'
 					v-if="isAuth('yuanliaocaigou','查看')"
 					:data="dataList"
 					v-loading="dataListLoading"
 				@selection-change="selectionChangeHandler">
 					<el-table-column :resizable='true' type="selection" align="center" width="50"></el-table-column>
 					<el-table-column :resizable='true' :sortable='true' label="序号" type="index" width="50" />
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="dingdanbianhao"
 					label="订单编号">
 						<template slot-scope="scope">
 							{{scope.row.dingdanbianhao}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="yuanliaobianhao"
 					label="原料编号">
 						<template slot-scope="scope">
 							{{scope.row.yuanliaobianhao}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="yuanliaoleibie"
 					label="原料类别">
 						<template slot-scope="scope">
 							{{scope.row.yuanliaoleibie}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="yuanliaomingcheng"
 					label="原料名称">
 						<template slot-scope="scope">
 							{{scope.row.yuanliaomingcheng}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
-						prop="yuanliaoguige"
-					label="原料规格">
-						<template slot-scope="scope">
-							{{scope.row.yuanliaoguige}}
-						</template>
-					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+<!--					<el-table-column :resizable='true' :sortable='true'  -->
+<!--						prop="yuanliaoguige"-->
+<!--					label="原料规格">-->
+<!--						<template slot-scope="scope">-->
+<!--							{{scope.row.yuanliaoguige}}-->
+<!--						</template>-->
+<!--					</el-table-column>-->
+					<el-table-column :resizable='true' :sortable='true'
 						prop="gongyingchangshang"
 					label="供应厂商">
 						<template slot-scope="scope">
 							{{scope.row.gongyingchangshang}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="caigoujiage"
 					label="采购价格">
 						<template slot-scope="scope">
 							{{scope.row.caigoujiage}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="caigourenyuan"
 					label="采购人员">
 						<template slot-scope="scope">
 							{{scope.row.caigourenyuan}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true'  
+					<el-table-column :resizable='true' :sortable='true'
 						prop="caigoushijian"
 					label="采购时间">
 						<template slot-scope="scope">
 							{{scope.row.caigoushijian}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='true' prop="ispay" label="是否支付">
-						<template slot-scope="scope">
-							<span style="margin-right:10px">{{scope.row.ispay=='已支付'?'已支付':'未支付'}}</span>
-							<el-button v-if="scope.row.ispay!='已支付' && isAuth('yuanliaocaigou','支付') " type="text" size="small" @click="payHandler(scope.row)">支付</el-button>
-						</template>
-					</el-table-column>
+          <el-table-column :resizable='true' :sortable='true'
+                           prop="jiage"
+                           label="原料单价">
+            <template slot-scope="scope">
+              {{scope.row.jiage}}
+            </template>
+          </el-table-column>
+          <el-table-column :resizable='true' :sortable='true'
+                           prop="count"
+                           label="采购数量">
+            <template slot-scope="scope">
+              {{scope.row.count}}
+            </template>
+          </el-table-column>
+<!--					<el-table-column :resizable='true' :sortable='true' prop="ispay" label="是否支付">-->
+<!--						<template slot-scope="scope">-->
+<!--							<span style="margin-right:10px">{{scope.row.ispay=='已支付'?'已支付':'未支付'}}</span>-->
+<!--							<el-button v-if="scope.row.ispay!='已支付' && isAuth('yuanliaocaigou','支付') " type="text" size="small" @click="payHandler(scope.row)">支付</el-button>-->
+<!--						</template>-->
+<!--					</el-table-column>-->
 					<el-table-column width="300" label="操作">
 						<template slot-scope="scope">
 							<el-button :style='{"border":"0px solid #1e98f5","cursor":"pointer","padding":"0 10px 0 24px","margin":"0 5px 6px","outline":"none","color":"#1e98f5","borderRadius":"0px","background":"url(http://codegen.caihongy.cn/20230329/38553f099fa74a2d86e2206c373a9539.png) no-repeat left center / 20px","width":"auto","fontSize":"15px","height":"32px"}' v-if=" isAuth('yuanliaocaigou','查看')" type="success" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
@@ -135,7 +149,7 @@
 				></el-pagination>
 			<!-- </div> -->
 		</template>
-		
+
 		<!-- 添加/修改页面  将父组件的search方法传递给子组件-->
 		<add-or-update v-if="addOrUpdateFlag" :parent="this" ref="addOrUpdate"></add-or-update>
 
@@ -345,17 +359,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-	
+
 	.center-form-pv {
 	  .el-date-editor.el-input {
 	    width: auto;
 	  }
 	}
-	
+
 	.el-input {
 	  width: auto;
 	}
-	
+
 	// form
 	.center-form-pv .el-input /deep/ .el-input__inner {
 				border: 1px solid #eee;
@@ -368,7 +382,7 @@ export default {
 				font-size: 16px;
 				height: 50px;
 			}
-	
+
 	.center-form-pv .el-select /deep/ .el-input__inner {
 				border: 1px solid #eee;
 				border-radius: 0px;
@@ -381,7 +395,7 @@ export default {
 				line-height: 30px;
 				height: 50px;
 			}
-	
+
 	.center-form-pv .el-date-editor /deep/ .el-input__inner {
 				border: 1px solid #eee;
 				border-radius: 0px;
@@ -393,18 +407,18 @@ export default {
 				font-size: 16px;
 				height: 50px;
 			}
-	
+
 	// table
 	.el-table /deep/ .el-table__header-wrapper thead {
 				color: #999;
 				font-weight: 500;
 				width: 100%;
 			}
-	
+
 	.el-table /deep/ .el-table__header-wrapper thead tr {
 				background: #fff;
 			}
-	
+
 	.el-table /deep/ .el-table__header-wrapper thead tr th {
 				padding: 10px;
 				color: #000;
@@ -429,7 +443,7 @@ export default {
 				text-overflow: ellipsis;
 			}
 
-	
+
 	.el-table /deep/ .el-table__body-wrapper tbody {
 				width: 100%;
 			}
@@ -437,7 +451,7 @@ export default {
 	.el-table /deep/ .el-table__body-wrapper tbody tr {
 				background: none;
 			}
-	
+
 	.el-table /deep/ .el-table__body-wrapper tbody tr td {
 				padding: 2px 10px;
 				color: #666;
@@ -447,11 +461,11 @@ export default {
 				border-style: solid;
 				text-align: left;
 			}
-	
+
 		.el-table /deep/ .el-table__body-wrapper tbody tr.el-table__row--striped td {
 		background: rgba(246,254,246,.5);
 	}
-		
+
 	.el-table /deep/ .el-table__body-wrapper tbody tr:hover td {
 				padding: 2px 10px;
 				color: #999;
@@ -461,7 +475,7 @@ export default {
 				border-style: solid;
 				text-align: left;
 			}
-	
+
 	.el-table /deep/ .el-table__body-wrapper tbody tr td {
 				padding: 2px 10px;
 				color: #666;
@@ -480,7 +494,7 @@ export default {
 				line-height: 24px;
 				text-overflow: ellipsis;
 			}
-	
+
 	// pagination
 	.main-content .el-pagination /deep/ .el-pagination__total {
 				margin: 0 10px 0 0;
@@ -492,7 +506,7 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-prev {
 				border: none;
 				border-radius: 30px;
@@ -507,7 +521,7 @@ export default {
 				min-width: 35px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-next {
 				border: none;
 				border-radius: 30px;
@@ -522,7 +536,7 @@ export default {
 				min-width: 35px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-prev:disabled {
 				border: none;
 				cursor: not-allowed;
@@ -537,7 +551,7 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-next:disabled {
 				border: none;
 				cursor: not-allowed;
@@ -575,7 +589,7 @@ export default {
 				min-width: 30px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pager .number:hover {
 				cursor: pointer;
 				padding: 0 4px;
@@ -591,7 +605,7 @@ export default {
 				min-width: 30px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pager .number.active {
 				cursor: default;
 				padding: 0 4px;
@@ -607,7 +621,7 @@ export default {
 				min-width: 30px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes {
 				display: inline-block;
 				vertical-align: top;
@@ -615,13 +629,13 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input {
 				margin: 0 5px;
 				width: 100px;
 				position: relative;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input .el-input__inner {
 				border: 1px solid #DCDFE6;
 				cursor: pointer;
@@ -637,14 +651,14 @@ export default {
 				text-align: center;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input span.el-input__suffix {
 				top: 0;
 				position: absolute;
 				right: 0;
 				height: 100%;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input .el-input__suffix .el-select__caret {
 				cursor: pointer;
 				color: #C0C4CC;
@@ -653,7 +667,7 @@ export default {
 				line-height: 28px;
 				text-align: center;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__jump {
 				margin: 0 0 0 24px;
 				color: #606266;
@@ -663,7 +677,7 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__jump .el-input {
 				border-radius: 3px;
 				padding: 0 2px;
@@ -676,7 +690,7 @@ export default {
 				text-align: center;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__jump .el-input .el-input__inner {
 				border: 1px solid #DCDFE6;
 				cursor: pointer;
