@@ -26,10 +26,10 @@
 
         <el-row
             :style='{"padding":"16px 12px 10px","margin":"0 0 0px","borderColor":"#e2f0e2","flexWrap":"wrap","background":"#fff","borderWidth":"1px 1px 0 1px","display":"flex","width":"auto","borderStyle":"solid","justifyContent":"flex-end","zIndex":"999"}'>
-<!--          <el-button-->
-<!--              :style='{"border":"0","cursor":"pointer","padding":"0 16px","margin":"0 10px 6px 0","borderColor":"#666","color":"#333","outline":"none","borderRadius":"0px","background":"#f9c535","borderWidth":"0 0 0px","width":"auto","fontSize":"16px","borderStyle":"solid","height":"36px"}'-->
-<!--              v-if="isAuth('yuangongkaoqin','新增')" type="success" @click="addOrUpdateHandler()">新增-->
-<!--          </el-button>-->
+          <el-button
+              :style='{"border":"0","cursor":"pointer","padding":"0 16px","margin":"0 10px 6px 0","borderColor":"#666","color":"#333","outline":"none","borderRadius":"0px","background":"#f9c535","borderWidth":"0 0 0px","width":"auto","fontSize":"16px","borderStyle":"solid","height":"36px"}'
+              v-if="isAuth('yuangongkaoqin','新增')" type="success" @click="addOrUpdateHandler()">新增
+          </el-button>
           <el-button
               :style='{"border":"0","cursor":"pointer","padding":"0 16px","margin":"0 10px 6px 0","borderColor":"#666","color":"#333","outline":"none","borderRadius":"0px","background":"#f9c535","borderWidth":"0 0 0px","width":"auto","fontSize":"16px","borderStyle":"solid","height":"36px"}'
               v-if="isAuth('yuangongkaoqin','删除')" :disabled="dataListSelections.length <= 0" type="danger"
@@ -122,16 +122,16 @@
         </el-table-column>
         <el-table-column width="300" label="操作">
           <template slot-scope="scope">
-            <el-button
-                :style='{"border":"0px solid #1e98f5","cursor":"pointer","padding":"0 10px 0 24px","margin":"0 5px 6px","outline":"none","color":"#1e98f5","borderRadius":"0px","background":"url(http://codegen.caihongy.cn/20230329/38553f099fa74a2d86e2206c373a9539.png) no-repeat left center / 20px","width":"auto","fontSize":"15px","height":"32px"}'
-                v-if=" isAuth('yuangongkaoqin','查看')" type="success" size="mini"
-                @click="addOrUpdateHandler(scope.row.id,'info')">详情
-            </el-button>
-            <el-button
-                :style='{"border":"0px solid #06d5dd","cursor":"pointer","padding":"0 10px 0 24px","margin":"0 5px 6px","outline":"none","color":"#15a4aa","borderRadius":"0px","background":"url(http://codegen.caihongy.cn/20230329/99f867042acb4c4aae637c8bfcf6714a.png) no-repeat left center","width":"auto","fontSize":"15px","height":"32px"}'
-                v-if=" isAuth('yuangongkaoqin','修改')" type="primary" size="mini" @click="addOrUpdateHandler(scope.row.id)">
-              修改
-            </el-button>
+<!--            <el-button-->
+<!--                :style='{"border":"0px solid #1e98f5","cursor":"pointer","padding":"0 10px 0 24px","margin":"0 5px 6px","outline":"none","color":"#1e98f5","borderRadius":"0px","background":"url(http://codegen.caihongy.cn/20230329/38553f099fa74a2d86e2206c373a9539.png) no-repeat left center / 20px","width":"auto","fontSize":"15px","height":"32px"}'-->
+<!--                v-if=" isAuth('yuangongkaoqin','查看')" type="success" size="mini"-->
+<!--                @click="addOrUpdateHandler(scope.row.id,'info')">详情-->
+<!--            </el-button>-->
+<!--            <el-button-->
+<!--                :style='{"border":"0px solid #06d5dd","cursor":"pointer","padding":"0 10px 0 24px","margin":"0 5px 6px","outline":"none","color":"#15a4aa","borderRadius":"0px","background":"url(http://codegen.caihongy.cn/20230329/99f867042acb4c4aae637c8bfcf6714a.png) no-repeat left center","width":"auto","fontSize":"15px","height":"32px"}'-->
+<!--                v-if=" isAuth('yuangongkaoqin','修改')" type="primary" size="mini" @click="addOrUpdateHandler(scope.row.id)">-->
+<!--              修改-->
+<!--            </el-button>-->
 
 
             <el-button
@@ -275,7 +275,7 @@ export default {
         params['yuangongxingming'] = '%' + this.searchForm.yuangongxingming + '%'
       }
       this.$http({
-        url: "yuangong/page",
+        url: "yuangongkaoqin/page",
         method: "get",
         params: params
       }).then(({data}) => {
@@ -333,7 +333,7 @@ export default {
         type: "warning"
       }).then(() => {
         this.$http({
-          url: "yuangong/delete",
+          url: "yuangongkaoqin/delete",
           method: "post",
           data: ids
         }).then(({data}) => {

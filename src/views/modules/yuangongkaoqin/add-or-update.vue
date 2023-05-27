@@ -13,18 +13,26 @@
       <template>
         <el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'" label="员工工号"
                       prop="yuangonggonghao">
-          <el-input v-model="ruleForm.yuangonggonghao" placeholder="员工工号" clearable
-                    :readonly="ro.yuangonggonghao"></el-input>
+          <!--          <el-input v-model="ruleForm.yuangonggonghao" placeholder="员工工号" clearable-->
+          <!--                    :readonly="ro.yuangonggonghao"></el-input>-->
+          <el-select v-model="ruleForm.yuangonggonghao" placeholder="请选择员工">
+            <el-option
+                v-for="(item,index) in yuangongOptions"
+                v-bind:key="index"
+                :label="item.yuangonggonghao"
+                :value="item.yuangonggonghao">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="员工工号" prop="yuangonggonghao">
           <el-input v-model="ruleForm.yuangonggonghao" placeholder="员工工号" readonly></el-input>
         </el-form-item>
-        <el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'" label="密码" prop="mima">
-          <el-input v-model="ruleForm.mima" placeholder="密码" clearable :readonly="ro.mima"></el-input>
-        </el-form-item>
-        <el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="密码" prop="mima">
-          <el-input v-model="ruleForm.mima" placeholder="密码" readonly></el-input>
-        </el-form-item>
+<!--        <el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'" label="密码" prop="mima">-->
+<!--          <el-input v-model="ruleForm.mima" placeholder="密码" clearable :readonly="ro.mima"></el-input>-->
+<!--        </el-form-item>-->
+<!--        <el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="密码" prop="mima">-->
+<!--          <el-input v-model="ruleForm.mima" placeholder="密码" readonly></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item :style='{"margin":"0 0 20px 0"}' class="input" v-if="type!='info'" label="员工姓名"
                       prop="yuangongxingming">
           <el-input v-model="ruleForm.yuangongxingming" placeholder="员工姓名" clearable
@@ -34,7 +42,7 @@
           <el-input v-model="ruleForm.yuangongxingming" placeholder="员工姓名" readonly></el-input>
         </el-form-item>
         <el-form-item :style='{"margin":"0 0 20px 0"}' class="select" v-if="type!='info'" label="性别" prop="xingbie">
-          <el-select :disabled="ro.xingbie" v-model="ruleForm.xingbie" placeholder="请选择性别">
+          <el-select disabled v-model="ruleForm.xingbie" placeholder="请选择性别">
             <el-option
                 v-for="(item,index) in xingbieOptions"
                 v-bind:key="index"
@@ -70,7 +78,7 @@
                 :value="item">
             </el-option>
           </el-select>
-<!--          <el-input v-model="ruleForm.zhiwei" placeholder="职位" clearable :readonly="ro.zhiwei"></el-input>-->
+          <!--          <el-input v-model="ruleForm.zhiwei" placeholder="职位" clearable :readonly="ro.zhiwei"></el-input>-->
         </el-form-item>
         <el-form-item :style='{"margin":"0 0 20px 0"}' v-else class="input" label="职位" prop="zhiwei">
           <el-input v-model="ruleForm.zhiwei" placeholder="职位" readonly></el-input>
@@ -246,6 +254,8 @@ export default {
       },
 
       xingbieOptions: [],
+      yuangongOptions: [],
+      bumen: '',
       bumenOptions: [],
       bumenOptions2: [
         "部长",
@@ -282,7 +292,45 @@ export default {
   components: {},
   created() {
   },
+  watch: {
+    'ruleForm.yuangonggonghao': {
+      handler(newValue, oldValue) {
+        this.yuangongOptions.forEach(item=>{
+          if (item.yuangonggonghao == newValue){
+            this.ruleForm.yuangongxingming =item.yuangongxingming;
+            this.ruleForm.xingbie =item.xingbie;
+            this.ruleForm.lianxifangshi =item.lianxifangshi;
+            this.ruleForm.bumen =item.bumen;
+            this.ruleForm.zhiwei =item.zhiwei;
+            this.ruleForm.ruzhishijian =item.ruzhishijian;
+            this.ruleForm.gongzikahao =item.gongzikahao;
+            this.ruleForm.shenfenzheng =item.shenfenzheng;
+            return;
+          }
+        })
+
+      },
+
+    }
+  },
   methods: {
+    getYuangongOptions() {
+      this.$http({
+        url: `yuangong/list`,
+        method: "get",
+        params: {
+          bumen: this.bumen
+        }
+      }).then(({data}) => {
+        if (data && data.code === 0) {
+          this.yuangongOptions = data.data.list;
+        } else {
+          this.$message.error(data.msg);
+        }
+      })
+
+    },
+
 
     // 下载
     download(file) {
@@ -364,6 +412,8 @@ export default {
         method: "get"
       }).then(({data}) => {
         if (data && data.code === 0) {
+          this.bumen = data.data.bumen;
+          this.getYuangongOptions()
 
           var json = data.data;
           if (this.$storage.get("role") != "管理员") {
@@ -459,7 +509,7 @@ export default {
               crossrefid: this.ruleForm.crossrefid,
             }
             this.$http({
-              url: "yuangong/page",
+              url: "yuangongkaoqin/page",
               method: "get",
               params: params
             }).then(({
@@ -471,7 +521,7 @@ export default {
                   return false;
                 } else {
                   this.$http({
-                    url: `yuangong/${!this.ruleForm.id ? "save" : "update"}`,
+                    url: `yuangongkaoqin/${!this.ruleForm.id ? "save" : "update"}`,
                     method: "post",
                     data: this.ruleForm
                   }).then(({data}) => {
@@ -499,7 +549,7 @@ export default {
             });
           } else {
             this.$http({
-              url: `yuangong/${!this.ruleForm.id ? "save" : "update"}`,
+              url: `yuangongkaoqin/${!this.ruleForm.id ? "save" : "update"}`,
               method: "post",
               data: this.ruleForm
             }).then(({data}) => {

@@ -319,9 +319,12 @@ export default {
         console.log(newValue, oldValue)
         if (newValue == '部长') {
           this.ruleForm.dixin = 7000
+        } else if (newValue == '副部长') {
+          this.ruleForm.dixin = 6000
+        } else if (newValue == '组长') {
+          this.ruleForm.dixin = 4000
         } else {
           this.ruleForm.dixin = 2000
-
         }
       },
 
@@ -347,7 +350,7 @@ export default {
     },
     getKaoqin(yuangonggonghao) {
       this.$http({
-        url: `chanpinxiaoshouzhangmu/getCount`,
+        url: `yuangongkaoqin/getCount`,
         method: "get",
         params: {
           yuangonggonghao: yuangonggonghao
@@ -355,7 +358,8 @@ export default {
       }).then(({data}) => {
         if (data && data.code === 0) {
           console.log(data.data)
-          this.ruleForm.jixiaojiangjin = data.data * 20;
+          this.ruleForm.jiabanfei = data.data.gzzsc * 5;
+          // this.ruleForm.jixiaojiangjin = data.data * 20;
         } else {
           this.$message.error(data.msg);
         }
@@ -485,6 +489,7 @@ export default {
     // 下二随
     yuangonggonghaoChange() {
       this.getJixiao(this.ruleForm.yuangonggonghao)
+      this.getKaoqin(this.ruleForm.yuangonggonghao)
       this.$http({
         url: `follow/yuangong/yuangonggonghao?columnValue=` + this.ruleForm.yuangonggonghao,
         method: "get"
@@ -502,9 +507,9 @@ export default {
           if (data.data.gongzikahao) {
             this.ruleForm.gongzikahao = data.data.gongzikahao
           }
-          if (data.data.gzzsc) {
-            this.ruleForm.jiabanfei = data.data.gzzsc *5;
-          }
+          // if (data.data.gzzsc) {
+          //   this.ruleForm.jiabanfei = data.data.gzzsc * 5;
+          // }
         } else {
           this.$message.error(data.msg);
         }
